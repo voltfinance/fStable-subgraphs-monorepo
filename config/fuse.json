@@ -1,0 +1,12 @@
+{
+    "network": "fuse",
+    "massets": [
+      {
+        "name": "mUSD",
+        "Masset": {
+          "address": "0x6b3898BE8A6aC84dBfbbb6f441B5cB474cA7dCF4",
+          "startBlock": 17318865
+        }
+      }
+    ]
+}

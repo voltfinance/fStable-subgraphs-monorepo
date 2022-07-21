@@ -26,6 +26,7 @@
     "deploy:staging": "yarn graph deploy mstable/mstable-protocol-staging --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
     "deploy:polygon-mumbai": "yarn graph deploy mstable/mstable-protocol-polygon-mumbai --network mumbai --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
     "deploy:polygon-mainnet": "yarn graph deploy mstable/mstable-protocol-polygon --network matic --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
+    "deploy:fuse": "yarn graph deploy --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ voltfinance/fusd-subgraph subgraph.yaml",
     "lint": "yarn run prettier './src/**/*.{ts,tsx}' --write",
     "deploy:mainnet": "yarn graph deploy mstable/mstable-protocol --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token "
   },

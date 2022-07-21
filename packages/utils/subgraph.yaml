@@ -27,7 +27,7 @@ dataSources:
         - name: Empty
           file: ./subgraph/Empty.json
         - name: ERC20
-          file: ../../node_modules/@mstable/protocol/abis/ERC20.json
+          file: abis/ERC20.json
       eventHandlers:
         - event: Empty()
           handler: empty
