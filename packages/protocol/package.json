@@ -18,6 +18,7 @@
     "prepare:mainnet": "yarn run prepare-codegen mainnet",
     "prepare:polygon-mumbai": "yarn run prepare-codegen polygon-mumbai",
     "prepare:polygon-mainnet": "yarn run prepare-codegen polygon-mainnet",
+    "prepare:fuse": "yarn run prepare-codegen fuse",
     "create:local": "yarn graph create mstable/mstable-protocol --node http://127.0.0.1:8020",
     "deploy:local": "yarn graph deploy mstable/mstable-protocol --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "deploy:ropsten": "yarn graph deploy mstable/mstable-protocol-ropsten --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
@@ -26,11 +27,11 @@
     "deploy:staging": "yarn graph deploy mstable/mstable-protocol-staging --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
     "deploy:polygon-mumbai": "yarn graph deploy mstable/mstable-protocol-polygon-mumbai --network mumbai --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
     "deploy:polygon-mainnet": "yarn graph deploy mstable/mstable-protocol-polygon --network matic --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token ",
-    "deploy:fuse": "yarn graph deploy --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ voltfinance/fusd-subgraph subgraph.yaml",
+    "deploy:fuse": "yarn graph deploy --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ voltfinance/fusd-v3 subgraph.yaml",
     "lint": "yarn run prettier './src/**/*.{ts,tsx}' --write",
     "deploy:mainnet": "yarn graph deploy mstable/mstable-protocol --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token "
   },
   "dependencies": {
-    "@mstable/subgraph-utils": "0.1.0"
+    "@mstable/subgraph-utils": "*"
   }
 }

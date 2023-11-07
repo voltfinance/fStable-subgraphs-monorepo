@@ -4,67 +4,7 @@ repository: https://github.com/mstable/mstable-subgraphs-monorepo
 schema:
   file: ./schema.generated.graphql
 
-graft:
-  base: QmVsLwJKqdaMZ41xokLcZ6fWWSBdmBAho2S1DRCAUgkfMb
-  block: 12735611
-#  block: 12042724
-
 dataSources:
-
-  {{#savingsManagers}}
-  - kind: ethereum/contract
-    name: 'SavingsManager.{{address}}'
-    network: '{{network}}'
-    source:
-      abi: SavingsManager
-      address: '{{address}}'
-      startBlock: {{startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      file: ./src/mappings/SavingsManager.ts
-      entities:
-        - Account
-        - AccountBalance
-        - Token
-        - ExchangeRate
-        - Masset
-      abis:
-        - name: MassetExtended
-          file: ../../abis/MassetExtended.json
-        - name: LegacyMasset
-          file: ../../abis/LegacyMasset.json
-        - name: SavingsManager
-          file: ../../abis/SavingsManager.json
-        - name: SavingsContractV1
-          file: ../../abis/SavingsContractV1.json
-        - name: SavingsContractV2
-          file: ../../abis/polygon-deploy/savings/SavingsContract.sol/SavingsContract.json
-        - name: ERC20Detailed
-          file: ../../abis/ERC20Detailed.json
-        - name: BasketManager
-          file: ../../abis/BasketManager.json
-        - name: Masset
-          file: ../../abis/polygon-deploy/masset/Masset.sol/Masset.json
-        - name: MassetManager
-          file: ../../abis/polygon-deploy/masset/MassetManager.sol/MassetManager.json
-      eventHandlers:
-        - event: SavingsContractAdded(indexed address,address)
-          handler: handleSavingsContractAdded
-        - event: SavingsContractUpdated(indexed address,address)
-          handler: handleSavingsContractUpdated
-        - event: SavingsRateChanged(uint256)
-          handler: handleSavingsRateChanged
-        - event: StreamsFrozen()
-          handler: handleStreamsFrozen
-        - event: LiquidatorDeposited(indexed address,uint256)
-          handler: handleLiquidatorDeposited
-        - event: InterestCollected(indexed address,uint256,uint256,uint256)
-          handler: handleInterestCollected
-        - event: InterestDistributed(indexed address,uint256)
-          handler: handleInterestDistributed
-  {{/savingsManagers}}
 
   {{#massets}}
   # {{name}}
@@ -92,6 +32,8 @@ dataSources:
           file: ../../abis/polygon-deploy/masset/MassetManager.sol/MassetManager.json
         - name: ERC20Detailed
           file: ../../abis/ERC20Detailed.json
+        - name: ERC20
+          file: ../../abis/ERC20.json
         - name: BasketManager
           file: ../../abis/BasketManager.json
         - name: LegacyMasset
@@ -164,74 +106,3 @@ dataSources:
   {{/MassetManager}}
 
   {{/massets}}
-
-  {{#vaults}}
-  - kind: ethereum/contract
-    name: 'BoostedSavingsVault_{{name}}'
-    network: '{{network}}'
-    source:
-      abi: BoostedSavingsVault
-      address: '{{address}}'
-      startBlock: {{startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      file: ./src/mappings/BoostedSavingsVault.ts
-      entities:
-        - Account
-        - BoostedSavingsVault
-        - BoostedSavingsVaultAccountData
-        - BoostedSavingsVaultAccountRewardEntry
-        - RewardsDistributor
-        - SavingsContract
-        - Token
-        - BoostedSavingsVaultStakeTransaction
-        - BoostedSavingsVaultRewardAddedTransaction
-        - BoostedSavingsVaultRewardPaidTransaction
-        - BoostedSavingsVaultWithdrawTransaction
-      abis:
-        - name: BoostedSavingsVault
-          file: ../../abis/polygon-deploy/savings/BoostedSavingsVault.sol/BoostedSavingsVault.json
-        - name: ERC20Detailed
-          file: ../../abis/ERC20Detailed.json
-      eventHandlers:
-        - event: Staked(indexed address,uint256,address)
-          handler: handleStaked
-        - event: RewardAdded(uint256)
-          handler: handleRewardAdded
-        - event: RewardPaid(indexed address,uint256)
-          handler: handleRewardPaid
-        - event: Withdrawn(indexed address,uint256)
-          handler: handleWithdrawn
-  {{/vaults}}
-
-templates:
-  - kind: ethereum/contract
-    name: SavingsContract
-    network: '{{network}}'
-    source:
-      abi: SavingsContractV2
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      file: ./src/mappings/SavingsContract.ts
-      entities:
-        - Token
-      abis:
-        - name: SavingsContractV1
-          file: ../../abis/SavingsContractV1.json
-        - name: SavingsContractV2
-          file: ../../abis/polygon-deploy/savings/SavingsContract.sol/SavingsContract.json
-        - name: ERC20Detailed
-          file: ../../abis/ERC20Detailed.json
-      eventHandlers:
-        - event: AutomaticInterestCollectionSwitched(bool)
-          handler: handleAutomaticInterestCollectionSwitched
-        - event: ExchangeRateUpdated(uint256,uint256)
-          handler: handleExchangeRateUpdated
-        - event: SavingsDeposited(indexed address,uint256,uint256)
-          handler: handleSavingsDeposited
-        - event: CreditsRedeemed(indexed address,uint256,uint256)
-          handler: handleCreditsRedeemed
